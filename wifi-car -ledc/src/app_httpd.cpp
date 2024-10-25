@@ -10,7 +10,7 @@ extern int DRV_B;
 extern int DIR_A;
 extern int DIR_B;
 extern int ledPin;
-extern int buzzerPin;
+// extern int buzzerPin;
 extern int servoPin;
 extern int ledVal;
 
@@ -299,7 +299,7 @@ static esp_err_t state_handler(httpd_req_t *req){
     }
 
     int res = 0;
-
+    
     if(!strcmp(cmd, "F")) {
       Serial.println("Forward");
       // digitalWrite(DRV_A, LOW);
@@ -429,14 +429,14 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "V")) {
       Serial.println("Horn On");
-      digitalWrite(buzzerPin, HIGH);
+      // digitalWrite(buzzerPin, HIGH);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     
     else if(!strcmp(cmd, "v")) {
       Serial.println("Horn Off");
-      digitalWrite(buzzerPin, LOW);
+      // digitalWrite(buzzerPin, LOW);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
@@ -487,68 +487,68 @@ static esp_err_t state_handler(httpd_req_t *req){
     /* Controlling the servo motor angle with PWM */
     /* ledcWrite(Channel, Dutycycle) dutycycle range : 3250-6500*/
     else if (!strcmp(cmd, "0")){
-      Serial.println("Servo 0 (3250)");
-      ledcWrite(8, 3250);
+      Serial.println("Servo 0 (3300)");
+      ledcWrite(5, 3250);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "1")){
       Serial.println("Servo 1 (3575)");
-      ledcWrite(8, 3575);
+      ledcWrite(5, 3575);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "2")){
       Serial.println("Servo 2 (3900)");
-      ledcWrite(8, 3900);
+      ledcWrite(5, 3900);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "3")){
       Serial.println("Servo 3 (4225)");
-      ledcWrite(8, 4225);
+      ledcWrite(5, 4225);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "4")){
       Serial.println("Servo 4 (4550)");
-      ledcWrite(8, 4550);
+      ledcWrite(5, 4550);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "5")){
       Serial.println("Servo 5 (4875)");
-      ledcWrite(8, 4875);
+      ledcWrite(5, 4875);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "6")){
       Serial.println("Servo 6 (5200)");
-      ledcWrite(8, 5200);
+      ledcWrite(5, 5200);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "7")){
       Serial.println("Servo 7 (5525)");
-      ledcWrite(8, 5525);
+      ledcWrite(5, 5525);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "8")){
       Serial.println("Servo 8 (5850)");
-      ledcWrite(8, 5850);
+      ledcWrite(5, 5850);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "9")){
       Serial.println("Servo 9 (6175)");
-      ledcWrite(8, 6175);
+      ledcWrite(5, 6175);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "q")){
       Serial.println("Servo q (6500)");
-      ledcWrite(8, 6500);
+      ledcWrite(5, 6500);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }

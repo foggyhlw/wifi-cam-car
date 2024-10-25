@@ -1,7 +1,8 @@
 #include "esp_camera.h"
 #include <WiFi.h>
 #include <ArduinoOTA.h>
-
+#include "soc/soc.h"
+#include "soc/rtc_cntl_reg.h"
 /* Wifi Crdentials */
 String sta_ssid = "foggy_2G";     // set Wifi network you want to connect to
 String sta_password = "1989Fox228";   // set password for Wifi network
@@ -30,10 +31,10 @@ extern int DRV_B = 13;
 extern int DIR_A = 14;
 extern int DIR_B = 15;
 
-extern int ledVal = 20;  // setting bright of flash LED 0-255
+extern int ledVal = 255;  // setting bright of flash LED 0-255
 
 extern int ledPin = 4;  // set digital pin GPIO4 as LED pin (use biult-in LED)
-extern int buzzerPin = 2;  // set digital pin GPIO2 as LED pin (use Active Buzzer)
+// extern int buzzerPin = 2;  // set digital pin GPIO2 as LED pin (use Active Buzzer)
 extern int servoPin = 2;  // set digital pin GPIO2 as servo pin (use SG90)
 
 unsigned long previousMillis = 0;
@@ -41,8 +42,8 @@ unsigned long previousMillis = 0;
 void startCameraServer();
 
 void initServo() {
-  ledcSetup(8, 50, 16); /*50 hz PWM, 16-bit resolution and range from 3250 to 6500 */
-  ledcAttachPin(servoPin, 8);
+  ledcSetup(5, 50, 16); /*50 hz PWM, 16-bit resolution and range from 3250 to 6500 */
+  ledcAttachPin(servoPin, 5);
 }
 
 void initLed() {
@@ -62,6 +63,7 @@ void init_moter(){
 }
 
 void setup() {
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
   Serial.begin(115200);         // set up seriamonitor at 115200 bps
   Serial.setDebugOutput(true);
   Serial.println();
@@ -75,7 +77,7 @@ void setup() {
   pinMode(DIR_B, OUTPUT);
   
   pinMode(ledPin, OUTPUT); // set the LED pin as an Output
-  pinMode(buzzerPin, OUTPUT); // set the buzzer pin as an Output
+  // pinMode(buzzerPin, OUTPUT); // set the buzzer pin as an Output
   pinMode(servoPin, OUTPUT); // set the servo pin as an Output
 
   // Initial state - turn off motors, LED & buzzer
@@ -84,7 +86,7 @@ void setup() {
   digitalWrite(DIR_A, LOW);
   digitalWrite(DIR_B, LOW);
   digitalWrite(ledPin, LOW);
-  digitalWrite(buzzerPin, LOW);
+  // digitalWrite(buzzerPin, LOW);
   digitalWrite(servoPin, LOW);
 
   /* Initializing Servo and LED */
