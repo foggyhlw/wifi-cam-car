@@ -3,8 +3,8 @@
 #include <ArduinoOTA.h>
 
 /* Wifi Crdentials */
-String sta_ssid = "foggy_2G";     // set Wifi network you want to connect to
-String sta_password = "1989Fox228";   // set password for Wifi network
+String sta_ssid = "ssid";     // set Wifi network you want to connect to
+String sta_password = "passwd";   // set password for Wifi network
 
 /* define CAMERA_MODEL_AI_THINKER */
 #define PWDN_GPIO_NUM     32
