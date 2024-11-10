@@ -4,8 +4,8 @@
 #include "soc/soc.h"
 #include "soc/rtc_cntl_reg.h"
 /* Wifi Crdentials */
-String sta_ssid = "ssid";     // set Wifi network you want to connect to
-String sta_password = "passwd";   // set password for Wifi network
+String sta_ssid = "foggy_2G";     // set Wifi network you want to connect to
+String sta_password = "1989Fox228";   // set password for Wifi network
 
 /* define CAMERA_MODEL_AI_THINKER */
 #define PWDN_GPIO_NUM     32
@@ -47,8 +47,8 @@ void initServo() {
 }
 
 void initLed() {
-  ledcSetup(7, 5000, 8); /* 5000 hz PWM, 8-bit resolution and range from 0 to 255 */
-  ledcAttachPin(ledPin, 7);
+  ledcSetup(2, 5000, 8); /* 5000 hz PWM, 8-bit resolution and range from 0 to 255 */
+  ledcAttachPin(ledPin, 2);
 }
 
 void init_moter(){

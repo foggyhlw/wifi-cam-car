@@ -299,13 +299,9 @@ static esp_err_t state_handler(httpd_req_t *req){
     }
 
     int res = 0;
-    
+    Serial.println(cmd);
     if(!strcmp(cmd, "F")) {
       Serial.println("Forward");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, HIGH);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, HIGH);
       ledcWrite(9, 0);
       ledcWrite(10, 255);
       ledcWrite(11, 0);
@@ -316,10 +312,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "B")) {
       Serial.println("Backward");
-      // digitalWrite(DRV_A, HIGH);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, HIGH);
-      // digitalWrite(DIR_B, LOW);
       ledcWrite(9, 255);
       ledcWrite(10, 0);
       ledcWrite(11, 255);
@@ -330,10 +322,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "L")) {
       Serial.println("Turn Left");
-      // digitalWrite(DRV_A, HIGH);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, HIGH);
       ledcWrite(9, 80);
       ledcWrite(10, 0);
       ledcWrite(11, 0);
@@ -344,10 +332,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "R")) {
       Serial.println("Turn Right");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, HIGH);
-      // digitalWrite(DIR_A, HIGH);
-      // digitalWrite(DIR_B, LOW);
       ledcWrite(9, 0);
       ledcWrite(10, 80);
       ledcWrite(11, 80);
@@ -358,11 +342,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "G")) {
       Serial.println("Forward Left");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, HIGH);
-
       ledcWrite(9, 0);
       ledcWrite(10, 20);
       ledcWrite(11, 0);
@@ -373,10 +352,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "H")) {
       Serial.println("Backward Left");
-      // digitalWrite(DRV_A, HIGH);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, LOW);
       ledcWrite(9, 255);
       ledcWrite(10, 0);
       ledcWrite(11, 0);
@@ -387,10 +362,6 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "I")) {
       Serial.println("Forward Right");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, HIGH);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, LOW);
       ledcWrite(9, 0);
       ledcWrite(10, 255);
       ledcWrite(11, 0);
@@ -401,10 +372,7 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "J")) {
       Serial.println("Backward Right");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, HIGH);
-      // digitalWrite(DIR_B, LOW);
+
       ledcWrite(9, 0);
       ledcWrite(10, 0);
       ledcWrite(11, 255);
@@ -415,10 +383,7 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "S")) {
       Serial.println("Stop");
-      // digitalWrite(DRV_A, LOW);
-      // digitalWrite(DRV_B, LOW);
-      // digitalWrite(DIR_A, LOW);
-      // digitalWrite(DIR_B, LOW);
+
       ledcWrite(9, 0);
       ledcWrite(10, 0);
       ledcWrite(11, 0);
@@ -443,14 +408,14 @@ static esp_err_t state_handler(httpd_req_t *req){
     
     else if(!strcmp(cmd, "W")) {
       Serial.println("LED On");
-      ledcWrite(7, ledVal);
+      ledcWrite(2, ledVal);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     
     else if(!strcmp(cmd, "w")) {
       Serial.println("LED Off");
-      ledcWrite(7, 0);
+      ledcWrite(2, 0);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
@@ -458,28 +423,28 @@ static esp_err_t state_handler(httpd_req_t *req){
     else if (!strcmp(cmd, "x")){
       Serial.println("Flash Light : Low (20)");
       ledVal = 20;
-      ledcWrite(7, ledVal);
+      ledcWrite(2, ledVal);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "y")){
       Serial.println("Flash Light : Medium (50)");
       ledVal = 50;
-      ledcWrite(7, ledVal);
+      ledcWrite(2, ledVal);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
     else if (!strcmp(cmd, "z")){
       Serial.println("Flash Light : Bright (100)");
       ledVal = 100;
-      ledcWrite(7, ledVal);
+      ledcWrite(2, ledVal);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }    
     else if (!strcmp(cmd, "Z")){
       Serial.println("Flash Light : Super Bright (255)");
       ledVal = 255;
-      ledcWrite(7, ledVal);
+      ledcWrite(2, ledVal);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }   
@@ -488,7 +453,7 @@ static esp_err_t state_handler(httpd_req_t *req){
     /* ledcWrite(Channel, Dutycycle) dutycycle range : 3250-6500*/
     else if (!strcmp(cmd, "0")){
       Serial.println("Servo 0 (3300)");
-      ledcWrite(5, 3250);
+      ledcWrite(5, 3300);
       httpd_resp_set_type(req, "text/html");
       return httpd_resp_send(req, "OK", 2);
     }
